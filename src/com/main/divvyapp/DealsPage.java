@@ -1,6 +1,6 @@
-package com.main.divvyup;
+package com.main.divvyapp;
 
-import com.example.divvyup.R;
+import com.main.divvyup.R;
 
 import android.app.Activity;
 import android.os.Bundle;

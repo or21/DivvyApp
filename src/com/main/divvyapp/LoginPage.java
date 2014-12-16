@@ -1,4 +1,4 @@
-package com.main.divvyup;
+package com.main.divvyapp;
 
 import helpeMethods.DataTransfer;
 import helpeMethods.ServerAsyncParent;
@@ -8,10 +8,9 @@ import java.util.UUID;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.divvyup.R;
+import com.main.divvyup.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -44,7 +43,7 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 
 		Log.i("Login", pref.getString("uid", "error"));
 		if (!checkIfAlreadyLoggedIn().equals("error")) {
-			goToDealsPageAndFinish(pref.getInt(uid, -1));
+			goToDealsPageAndFinish();
 		}
 
 		else {
@@ -71,7 +70,7 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 		params.add(new BasicNameValuePair("email", email.getText().toString()));
 		params.add(new BasicNameValuePair("phone", phone.getText().toString()));
 		params.add(new BasicNameValuePair("uid", uid));
-		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://192.168.43.171/php/milab_send_details.php");
+		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://10.10.0.122/php/milab_send_details.php");
 	}
 
 	@Override
@@ -79,22 +78,17 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 		editor.putString("uid", uid);
 		editor.commit();
 		sendData(v);
-		goToDealsPageAndFinish(pref.getInt(uid, -1));
+		goToDealsPageAndFinish();
 	}
 
-	public void goToDealsPageAndFinish(int uid) {
+	public void goToDealsPageAndFinish() {
 		Intent intent = new Intent(this, DealsPage.class);
-		intent.putExtra("uid", uid);
 		startActivity(intent);
 		finish();
 	}
 
 	@Override
 	public void doOnPostExecute(JSONObject jObj) {
-		try {
-			goToDealsPageAndFinish(jObj.getInt("uid"));
-		} catch (JSONException e) {
-			e.printStackTrace();
+			goToDealsPageAndFinish();
 		}
-	}
 }

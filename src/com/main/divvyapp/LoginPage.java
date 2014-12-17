@@ -10,7 +10,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import com.main.divvyup.R;
+import com.main.divvyapp.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -43,7 +43,8 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 
 		Log.i("Login", pref.getString("uid", "error"));
 		if (!checkIfAlreadyLoggedIn().equals("error")) {
-			goToDealsPageAndFinish();
+			View v = new View(context);
+			goToDealsPageAndFinish(v);
 		}
 
 		else {
@@ -70,7 +71,7 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 		params.add(new BasicNameValuePair("email", email.getText().toString()));
 		params.add(new BasicNameValuePair("phone", phone.getText().toString()));
 		params.add(new BasicNameValuePair("uid", uid));
-		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://10.10.0.122/php/milab_send_details.php");
+		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://10.10.7.35/php/milab_send_details.php");
 	}
 
 	@Override
@@ -78,10 +79,10 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 		editor.putString("uid", uid);
 		editor.commit();
 		sendData(v);
-		goToDealsPageAndFinish();
+		goToDealsPageAndFinish(v);
 	}
 
-	public void goToDealsPageAndFinish() {
+	public void goToDealsPageAndFinish(View v) {
 		Intent intent = new Intent(this, DealsPage.class);
 		startActivity(intent);
 		finish();
@@ -89,6 +90,7 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 
 	@Override
 	public void doOnPostExecute(JSONObject jObj) {
-			goToDealsPageAndFinish();
+			View v = new View(context);
+			goToDealsPageAndFinish(v);
 		}
 }

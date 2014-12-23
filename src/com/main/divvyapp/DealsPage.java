@@ -32,6 +32,7 @@ public class DealsPage extends Activity implements OnClickListener {
 		if (claimedBy != 0) {
 			Intent intent = new Intent(this, CompleteMatch.class);
 			intent.putExtra("dealid", dealid);
+			//intent.putExtra("deadLine", deadLine);
 			startActivity(intent);
 			finish();
 		}

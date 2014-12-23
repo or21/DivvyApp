@@ -35,10 +35,11 @@ public class CompleteMatch extends Activity implements ServerAsyncParent, OnClic
 		setContentView(R.layout.activity_complete_match);
 
 		pref = getSharedPreferences(null, Context.MODE_PRIVATE);
-		dealId = getIntent().getExtras().getInt("dealid", -1);
+		dealId = getIntent().getExtras().getInt("dealid");
 		context = getApplicationContext();
 		
-		// need to be changed to the real time from DB
+		// need to be changed to the real time from intent
+		// time = getIntent().getExtras().getString("deadLine");
 		time = "22:55";
 		
 		// divides the time to hours and minutes
@@ -50,6 +51,12 @@ public class CompleteMatch extends Activity implements ServerAsyncParent, OnClic
 		
 		int diffhour = (int) (hour - c.get(Calendar.HOUR_OF_DAY)) ;
 		int diffminute = (int) (minutes - c.get(Calendar.MINUTE));
+		
+		// taking care of time calculations
+		if (diffhour < 0) {
+			diffhour = diffhour + 24;
+		}
+		
 		if (diffminute < 0) {
 			diffhour--;
 			diffminute = diffminute + 60;
@@ -75,7 +82,7 @@ public class CompleteMatch extends Activity implements ServerAsyncParent, OnClic
 		};
 		cT.start();
 		
-		// performing match - sets the claimedBy and deadLine fileds in DB to 0
+		// performing match - sets the claimedBy and deadLine fields in DB to 0
 		Button completeMatch = (Button) findViewById(R.id.completeDeal);
 		completeMatch.setOnClickListener(this);
 	}
@@ -90,6 +97,7 @@ public class CompleteMatch extends Activity implements ServerAsyncParent, OnClic
 
 	@Override
 	public void onClick(View v) {
+		// Enter code of sending SMS/opening chat in order to meet the other person
 		sendUpadte(v);
 	}
 

@@ -18,6 +18,7 @@ public class DealsPage extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_deals_page);
 		
+		// should change to the real value from DB
 		dealid = 12;
 		Button move = (Button) findViewById(R.id.moveToFindMatch);
 		move.setOnClickListener(this);
@@ -25,9 +26,20 @@ public class DealsPage extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		Intent intent = new Intent(this, FindMeMatch.class);
-		intent.putExtra("dealid", dealid);
-		startActivity(intent);
-		finish();
+		// should change to the real value from DB
+		int claimedBy = 0;
+		
+		if (claimedBy != 0) {
+			Intent intent = new Intent(this, CompleteMatch.class);
+			intent.putExtra("dealid", dealid);
+			startActivity(intent);
+			finish();
+		}
+		else {
+			Intent intent = new Intent(this, FindMeMatch.class);
+			intent.putExtra("dealid", dealid);
+			startActivity(intent);
+			finish();
+		}
 	}
 }

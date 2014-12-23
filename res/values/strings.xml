@@ -9,11 +9,14 @@
     <string name="Login">Login</string>
     <string name="skip">Skip</string>
     <string name="timePick">Until when will you be at the mall? </string>
+    <string name="timeLeft">This customer will leave the mall in: </string>
     <string name="username">Username:</string>
     <string name="email">Email:</string>
     <string name="phone">Phone:</string>
     <string name="claimDeal">Request Match</string>
+    <string name="completeDeal">Complete Deal</string>
     <string name="title_activity_data_sender">DataSender</string>
     <string name="title_activity_find_me_match">FindMeMatch</string>
+    <string name="title_activity_complete_match">CompleteMatch</string>
 
 </resources>

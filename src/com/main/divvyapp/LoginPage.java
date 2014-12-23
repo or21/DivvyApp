@@ -40,13 +40,15 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 		pref = getSharedPreferences(null, Context.MODE_PRIVATE);
 		context = getApplicationContext();
 		editor = pref.edit();
-
+		
+		// Skips login if the user already signed in
 		Log.i("Login", pref.getString("uid", "error"));
 		if (!checkIfAlreadyLoggedIn().equals("error")) {
 			View v = new View(context);
 			goToDealsPageAndFinish(v);
 		}
-
+		
+		// if didn't, then the user need to sign in
 		else {
 			setContentView(R.layout.activity_login_page);
 
@@ -60,11 +62,13 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 			login.setOnClickListener(this);
 		}
 	}
-
+	
+	// checks if the user already signed in for the app
 	private String checkIfAlreadyLoggedIn() {
 		return pref.getString(uid, "error");
 	}
-
+	
+	// Sends user data to the DB after first sign in
 	public void sendData(View v) {
 		ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("userName", userName.getText().toString()));
@@ -73,7 +77,8 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 		params.add(new BasicNameValuePair("uid", uid));
 		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://192.168.43.171/php/milab_send_details.php");
 	}
-
+	
+	// saves the user id in the shared preferences in order to check the login next time
 	@Override
 	public void onClick(View v) {
 		editor.putString("uid", uid);

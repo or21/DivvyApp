@@ -3,9 +3,9 @@
     package="com.main.divvyapp"
     android:versionCode="1"
     android:versionName="1.0" >
-	
+
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
@@ -31,6 +31,10 @@
         <activity
             android:name=".FindMeMatch"
             android:label="@string/title_activity_find_me_match" >
+        </activity>
+        <activity
+            android:name=".CompleteMatch"
+            android:label="@string/title_activity_complete_match" >
         </activity>
     </application>
 

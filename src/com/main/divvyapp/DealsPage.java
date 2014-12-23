@@ -27,7 +27,7 @@ public class DealsPage extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// should change to the real value from DB
-		int claimedBy = 0;
+		int claimedBy = 1;
 		
 		if (claimedBy != 0) {
 			Intent intent = new Intent(this, CompleteMatch.class);

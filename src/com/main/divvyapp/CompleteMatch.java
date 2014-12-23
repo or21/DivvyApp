@@ -4,6 +4,7 @@ import helpeMethods.DataTransfer;
 import helpeMethods.ServerAsyncParent;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -35,14 +36,29 @@ public class CompleteMatch extends Activity implements ServerAsyncParent, OnClic
 		pref = getSharedPreferences(null, Context.MODE_PRIVATE);
 		dealId = getIntent().getExtras().getInt("dealid", -1);
 		context = getApplicationContext();
-
-		CountDownTimer cT =  new CountDownTimer(100000, 1000) {
+		
+		String time = "22:55";
+		final int hour = Integer.parseInt((String) time.subSequence(0, time.indexOf(':')));
+		final int minutes = Integer.parseInt((String) time.subSequence(time.indexOf(':') + 1, time.length()));
+		
+		Calendar c = Calendar.getInstance(); 
+		
+		int diffhour = (int) (hour - c.get(Calendar.HOUR_OF_DAY)) ;
+		int diffminute = (int) (minutes - c.get(Calendar.MINUTE));
+		if (diffminute < 0) {
+			diffhour--;
+			diffminute = diffminute + 60;
+		}
+		int miliDeadLine = (diffhour * 3600000) + (diffminute * 60000);
+		
+		CountDownTimer cT =  new CountDownTimer(miliDeadLine, 1000) {
 
 			public void onTick(long millisUntilFinished) {
 				countdown = (TextView) findViewById(R.id.countdown);
-				String v = String.format("%02d", millisUntilFinished/60000);
-				int va = (int)( (millisUntilFinished%60000)/1000);
-				countdown.setText("seconds remaining: " +v+":"+String.format("%02d",va));
+				int vh = (int)( (millisUntilFinished / (1000*60*60)) % 24);
+				int vm = (int)( (millisUntilFinished / 60000) % 60);
+				int vs = (int)( (millisUntilFinished / 1000) % 60);
+				countdown.setText(String.format("%02d",vh)+":"+String.format("%02d",vm)+":"+String.format("%02d",vs));
 			}
 
 			public void onFinish() {

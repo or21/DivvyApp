@@ -23,11 +23,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-/**
- * test test
- * @author nleinov
- *
- */
 public class LoginPage extends Activity implements OnClickListener , ServerAsyncParent {
 
 	EditText userName ;
@@ -76,7 +71,7 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 		params.add(new BasicNameValuePair("email", email.getText().toString()));
 		params.add(new BasicNameValuePair("phone", phone.getText().toString()));
 		params.add(new BasicNameValuePair("uid", uid));
-		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://10.10.7.35/php/milab_send_details.php");
+		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://192.168.43.171/php/milab_send_details.php");
 	}
 
 	@Override
@@ -84,7 +79,6 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 		editor.putString("uid", uid);
 		editor.commit();
 		sendData(v);
-		goToDealsPageAndFinish(v);
 	}
 
 	public void goToDealsPageAndFinish(View v) {
@@ -95,7 +89,6 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 
 	@Override
 	public void doOnPostExecute(JSONObject jObj) {
-			View v = new View(context);
-			goToDealsPageAndFinish(v);
+			goToDealsPageAndFinish(null);
 		}
 }

@@ -9,8 +9,18 @@
     tools:context="com.main.divvyapp.DealsPage" >
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
+
+    <Button
+        android:id="@+id/moveToFindMatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="170dp"
+        android:layout_toRightOf="@+id/textView1"
+        android:text="moveToFindMatch" />
 
 </RelativeLayout>

@@ -23,6 +23,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * test test
+ * @author nleinov
+ *
+ */
 public class LoginPage extends Activity implements OnClickListener , ServerAsyncParent {
 
 	EditText userName ;

@@ -18,5 +18,11 @@
     <string name="title_activity_data_sender">DataSender</string>
     <string name="title_activity_find_me_match">FindMeMatch</string>
     <string name="title_activity_complete_match">CompleteMatch</string>
+    <string name="id">ID:</string>
+    <string name="claimedBy">ClaimedBy:</string>
+    <string name="picture">Picture:</string>
+    <string name="storeid">StoreID:</string>
+    <string name="deadLine">deadLine:</string>
+    
 
 </resources>

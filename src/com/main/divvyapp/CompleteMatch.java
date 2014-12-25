@@ -37,34 +37,31 @@ public class CompleteMatch extends Activity implements ServerAsyncParent, OnClic
 		pref = getSharedPreferences(null, Context.MODE_PRIVATE);
 		dealId = getIntent().getExtras().getInt("dealid");
 		context = getApplicationContext();
-		
-		// need to be changed to the real time from intent
-		// time = getIntent().getExtras().getString("deadLine");
-		time = "22:55";
-		
+		time = getIntent().getExtras().getString("deadLine");
+
 		// divides the time to hours and minutes
 		final int hour = Integer.parseInt((String) time.subSequence(0, time.indexOf(':')));
 		final int minutes = Integer.parseInt((String) time.subSequence(time.indexOf(':') + 1, time.length()));
-		
+
 		// Gets the time from the device and calculates the difference
 		Calendar c = Calendar.getInstance(); 
-		
+
 		int diffhour = (int) (hour - c.get(Calendar.HOUR_OF_DAY)) ;
 		int diffminute = (int) (minutes - c.get(Calendar.MINUTE));
-		
+
 		// taking care of time calculations
 		if (diffhour < 0) {
 			diffhour = diffhour + 24;
 		}
-		
+
 		if (diffminute < 0) {
 			diffhour--;
 			diffminute = diffminute + 60;
 		}
-		
+
 		// sums the difference from dead line and convert to milliseconds
 		int miliDeadLine = (diffhour * 3600000) + (diffminute * 60000);
-		
+
 		// launching the countDown
 		CountDownTimer cT =  new CountDownTimer(miliDeadLine, 1000) {
 
@@ -81,7 +78,7 @@ public class CompleteMatch extends Activity implements ServerAsyncParent, OnClic
 			}
 		};
 		cT.start();
-		
+
 		// performing match - sets the claimedBy and deadLine fields in DB to 0
 		Button completeMatch = (Button) findViewById(R.id.completeDeal);
 		completeMatch.setOnClickListener(this);

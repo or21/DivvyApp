@@ -27,7 +27,7 @@
             style="@style/AppBaseTheme"
             android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="22"
+            android:layout_weight="23"
             android:gravity="center_vertical"
             android:text="@string/claimedBy" />
 

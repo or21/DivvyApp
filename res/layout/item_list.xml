@@ -15,7 +15,7 @@
         style="@style/AppBaseTheme"/>
     <TextView 
         android:id="@+id/claimedBy"
-        android:layout_weight="22"
+        android:layout_weight="23"
         android:layout_width="0px"
         android:layout_height="match_parent"
         android:gravity="center"

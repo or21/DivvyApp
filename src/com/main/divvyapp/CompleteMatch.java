@@ -21,7 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class CompleteMatch extends Activity implements ServerAsyncParent, OnClickListener {
+public class CompleteMatch extends Activity implements ServerAsyncParent {
 
 	Context context;
 	int dealId;
@@ -62,26 +62,52 @@ public class CompleteMatch extends Activity implements ServerAsyncParent, OnClic
 		// sums the difference from dead line and convert to milliseconds
 		int miliDeadLine = (diffhour * 3600000) + (diffminute * 60000);
 
-		// launching the countDown
-		CountDownTimer cT =  new CountDownTimer(miliDeadLine, 1000) {
+		// if the deal is finishing right now giving the option to return to DealsPage
+		if (miliDeadLine <= 60000) {
+			countdown = (TextView) findViewById(R.id.countdown);
+			countdown.setText("Expired!");
+			Button completeMatch = (Button) findViewById(R.id.completeDeal);
+			completeMatch.setText("Back to Deals");
+			completeMatch.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(context, DealsPage.class);
+					startActivity(intent);
+					finish();
+				}
+			});
 
-			public void onTick(long millisUntilFinished) {
-				countdown = (TextView) findViewById(R.id.countdown);
-				int vh = (int)( (millisUntilFinished / (1000*60*60)) % 24);
-				int vm = (int)( (millisUntilFinished / 60000) % 60);
-				int vs = (int)( (millisUntilFinished / 1000) % 60);
-				countdown.setText(String.format("%02d",vh)+":"+String.format("%02d",vm)+":"+String.format("%02d",vs));
-			}
+		// otherwise - start the countDown
+		} else {
+			// launching the countDown
+			CountDownTimer cT =  new CountDownTimer(miliDeadLine, 1000) {
 
-			public void onFinish() {
-				countdown.setText("Expired!");
-			}
-		};
-		cT.start();
+				public void onTick(long millisUntilFinished) {
+					countdown = (TextView) findViewById(R.id.countdown);
+					int vh = (int)( (millisUntilFinished / (1000*60*60)) % 24);
+					int vm = (int)( (millisUntilFinished / 60000) % 60);
+					int vs = (int)( (millisUntilFinished / 1000) % 60);
+					countdown.setText(String.format("%02d",vh)+":"+String.format("%02d",vm)+":"+String.format("%02d",vs));
+				}
 
-		// performing match - sets the claimedBy and deadLine fields in DB to 0
-		Button completeMatch = (Button) findViewById(R.id.completeDeal);
-		completeMatch.setOnClickListener(this);
+				public void onFinish() {
+					countdown.setText("Expired!");
+				}
+			};
+			cT.start();
+
+			// performing match - sets the claimedBy and deadLine fields in DB to 0
+			Button completeMatch = (Button) findViewById(R.id.completeDeal);
+			completeMatch.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// Enter code of sending SMS/opening chat in order to meet the other person
+					sendUpadte(v);
+				}
+			});
+		}
 	}
 
 	public void sendUpadte(View v) {
@@ -90,12 +116,6 @@ public class CompleteMatch extends Activity implements ServerAsyncParent, OnClic
 		params.add(new BasicNameValuePair("dealid", "" + dealId));
 		params.add(new BasicNameValuePair("uid", "0"));
 		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://192.168.43.171/php/milab_send_deal_update.php");
-	}
-
-	@Override
-	public void onClick(View v) {
-		// Enter code of sending SMS/opening chat in order to meet the other person
-		sendUpadte(v);
 	}
 
 	// This should change to class that will make the match by send phone number or anything like this

@@ -1,4 +1,4 @@
-DivvyUp
+DivvyApp
 =======
 
 Nir and Or app

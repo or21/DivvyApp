@@ -34,7 +34,7 @@ public class CompleteMatch extends Activity implements ServerAsyncParent {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_complete_match);
 
-		pref = getSharedPreferences(null, Context.MODE_PRIVATE);
+		pref = getSharedPreferences("com.main.divvyapp", MODE_PRIVATE);
 		dealId = getIntent().getExtras().getInt("dealid");
 		context = getApplicationContext();
 		time = getIntent().getExtras().getString("deadLine");

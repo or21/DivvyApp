@@ -17,7 +17,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -37,15 +36,14 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		pref = getSharedPreferences(null, Context.MODE_PRIVATE);
+		pref = getSharedPreferences("com.main.divvyapp", Context.MODE_PRIVATE);
+		editor = pref.edit();
 		context = getApplicationContext();
 		editor = pref.edit();
 		
 		// Skips login if the user already signed in
-		Log.i("Login", pref.getString("uid", "error"));
 		if (!checkIfAlreadyLoggedIn().equals("error")) {
-			View v = new View(context);
-			goToDealsPageAndFinish(v);
+			goToDealsPageAndFinish(null);
 		}
 		
 		// if didn't, then the user need to sign in
@@ -65,7 +63,7 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 	
 	// checks if the user already signed in for the app
 	private String checkIfAlreadyLoggedIn() {
-		return pref.getString(uid, "error");
+		return pref.getString("uid", "error");
 	}
 	
 	// Sends user data to the DB after first sign in

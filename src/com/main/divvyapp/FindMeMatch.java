@@ -31,7 +31,7 @@ public class FindMeMatch extends Activity implements OnClickListener, ServerAsyn
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_find_me_match);
 		
-		pref = getSharedPreferences(null, Context.MODE_PRIVATE);
+		pref = getSharedPreferences("com.main.divvyapp", MODE_PRIVATE);
 		dealId = getIntent().getExtras().getInt("dealid", -1);
 		context = getApplicationContext();
 		deadLine = (TimePicker) findViewById(R.id.deadLine);

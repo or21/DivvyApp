@@ -43,7 +43,9 @@ public class FindMeMatch extends Activity implements OnClickListener, ServerAsyn
 		ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("deadLine", (deadLine.getCurrentHour().toString() + ":" + deadLine.getCurrentMinute()).toString()));
 		params.add(new BasicNameValuePair("dealid", "" + dealId));
-		params.add(new BasicNameValuePair("uid", pref.getString("uid", "error")));
+		params.add(new BasicNameValuePair("uidNew", pref.getString("uid", "error")));
+		params.add(new BasicNameValuePair("chatid", "request"));
+		params.add(new BasicNameValuePair("uid", ""));
 		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://192.168.43.171/php/milab_send_deal_update.php");
 	}
 	

@@ -47,8 +47,8 @@ public class DataTransfer extends AsyncTask<String, Void, Boolean> {
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		dialog.setMessage("Sending request to server, please wait...");
-		dialog.show();
+//		dialog.setMessage("Sending request to server, please wait...");
+//		dialog.show();
 	}
 
 	@Override

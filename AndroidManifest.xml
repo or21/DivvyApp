@@ -36,10 +36,6 @@
             android:name=".CompleteMatch"
             android:label="@string/title_activity_complete_match" >
         </activity>
-        <activity
-            android:name=".ChatAfterMatch"
-            android:label="@string/title_activity_chat_after_match" >
-        </activity>
     </application>
 
 </manifest>

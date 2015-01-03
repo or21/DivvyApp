@@ -82,21 +82,22 @@ public class DealsPage extends Activity implements ServerAsyncParent {
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 					
 					HashMap<String, String> selected = (HashMap<String, String>) mainList.getItemAtPosition(position);
-					String claimedBy = selected.get("claimedBy");
+					int claimedBy = Integer.parseInt(selected.get("claimedBy"));
 					String deadLine = selected.get("deadLine");
 					dealid = Integer.parseInt(selected.get("id"));
 					
-					if (!claimedBy.equals("")) {
+					if (claimedBy != 0) {
 						Intent intent = new Intent(context, CompleteMatch.class);
 						intent.putExtra("dealid", dealid);
-						intent.putExtra("claimedBy", claimedBy);
 						intent.putExtra("deadLine", deadLine);
 						startActivity(intent);
+						finish();
 					}
 					else {
 						Intent intent = new Intent(context, FindMeMatch.class);
 						intent.putExtra("dealid", dealid);
 						startActivity(intent);
+						finish();
 					}
 				}
 			});

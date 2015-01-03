@@ -39,6 +39,7 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
 		pref = getSharedPreferences("com.main.divvyapp", Context.MODE_PRIVATE);
 		editor = pref.edit();
 		context = getApplicationContext();
+		editor = pref.edit();
 		
 		// Skips login if the user already signed in
 		if (!checkIfAlreadyLoggedIn().equals("error")) {

@@ -23,7 +23,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class LoginPage extends Activity implements OnClickListener , ServerAsyncParent {
-
+	
+	// project name = gleaming-store-812
+	// API key = AIzaSyDupEvL_J9fHlr0UvyaHnkRpyRbvmBjBQM
+	
 	EditText userName ;
 	EditText email;
 	EditText phone;

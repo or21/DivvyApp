@@ -40,6 +40,10 @@
             android:name=".ChatAfterMatch"
             android:label="@string/title_activity_chat_after_match" >
         </activity>
+        <activity
+            android:name=".StorePage"
+            android:label="@string/title_activity_store_page" >
+        </activity>
     </application>
 
 </manifest>

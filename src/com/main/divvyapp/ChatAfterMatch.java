@@ -100,13 +100,13 @@ public class ChatAfterMatch extends Activity implements ServerAsyncParent {
 		if (operation == get) {
 			ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("chatid", completer + claimer));
-			new DataTransfer(this, params, DataTransfer.METHOD_GET).execute("http://192.168.43.171/php/milab_get_chat.php");
+			new DataTransfer(this, params, DataTransfer.METHOD_GET).execute("http://10.0.0.19:8080//php/milab_get_chat.php");
 		} else {
 			ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("chatid", completer + claimer));
 			params.add(new BasicNameValuePair("name", uid));
 			params.add(new BasicNameValuePair("message", message));
-			new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://192.168.43.171/php/milab_update_chat.php");
+			new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://10.0.0.19:8080/php/milab_update_chat.php");
 		}
 	}
 

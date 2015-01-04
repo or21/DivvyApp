@@ -7,10 +7,9 @@
     android:orientation="vertical"
     android:weightSum="100"
     tools:context="com.main.divvyapp.DealsPage" >
-
-  <!--    
+ <!--
     <ListView
-        android:id="@+id/mainList"
+        android:id="@+id/dealList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:cacheColorHint="#00000000"
@@ -19,20 +18,17 @@
         android:listSelector="#00000000"
         android:orientation="vertical" >
     </ListView>
--->
-   
-    <GridView 
-    android:id="@+id/mainList"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:columnWidth="90dp"
-    android:numColumns="auto_fit"
-    android:verticalSpacing="10dp"
-    android:horizontalSpacing="10dp"
-    android:stretchMode="columnWidth"
-    android:gravity="center"
-    />
-     
-
+  -->
+        
+    <GridView
+        android:id="@+id/dealList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnWidth="90dp"
+        android:gravity="center_horizontal|fill_horizontal"
+        android:horizontalSpacing="100dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="spacingWidth"
+        android:verticalSpacing="100dp" />
 
 </LinearLayout>

@@ -27,5 +27,6 @@
     <string name="image_button_delete">image_button_delete:</string>
     <string name="title_activity_add_deal">AddDeal</string>
     <string name="title_activity_chat_after_match">ChatAfterMatch</string>
+    <string name="title_activity_store_page">StorePage</string>
 
 </resources>

@@ -46,7 +46,7 @@ public class FindMeMatch extends Activity implements OnClickListener, ServerAsyn
 		params.add(new BasicNameValuePair("uidNew", pref.getString("uid", "error")));
 		params.add(new BasicNameValuePair("chatid", "request"));
 		params.add(new BasicNameValuePair("uid", ""));
-		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://192.168.43.171/php/milab_send_deal_update.php");
+		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://10.0.0.19:8080/php/milab_send_deal_update.php");
 	}
 	
 	@Override

@@ -102,7 +102,7 @@ public class CompleteMatch extends Activity implements ServerAsyncParent {
 		params.add(new BasicNameValuePair("uidNew", null));
 		params.add(new BasicNameValuePair("chatid", completer + claimer));
 		params.add(new BasicNameValuePair("uid", completer));
-		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://192.168.43.171/php/milab_send_deal_update.php");
+		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://10.0.0.19:8080/php/milab_send_deal_update.php");
 	}
 
 	// This should change to class that will make the match by send phone number or anything like this

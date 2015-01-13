@@ -32,6 +32,7 @@ public class ChatAfterMatch extends Activity implements ServerAsyncParent {
 	SharedPreferences pref;
 	String claimedBy;
 	String uid;
+	String me;
 	private ListView mainList;
 	Boolean visible;
 	Button send;
@@ -41,10 +42,13 @@ public class ChatAfterMatch extends Activity implements ServerAsyncParent {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chat_after_match);
-
-		pref = getSharedPreferences("com.main.divvyapp", MODE_PRIVATE);
-		claimedBy = getIntent().getStringExtra("claimedBy");
-		uid = pref.getString("uid", "error");
+		
+		Bundle extras = getIntent().getExtras();
+		
+		pref = getSharedPreferences(LoginPage.class.getSimpleName(), MODE_PRIVATE);
+		claimedBy = extras.getString("claimedBy");
+		uid = extras.getString("uid");
+		me = pref.getString("uid", "error");
 		mainList = (ListView) findViewById(R.id.mainChatList);
 
 		final EditText chatWindow = (EditText) findViewById(R.id.chatWindow);
@@ -95,18 +99,18 @@ public class ChatAfterMatch extends Activity implements ServerAsyncParent {
 	public void ChatServer(String uid, String claimedBy, String message, String operation) {
 		String claimer = claimedBy.substring(0, claimedBy.indexOf("-"));
 		String completer = uid.substring(0, uid.indexOf("-"));
-		
+
 		// Sending GET request to server
 		if (operation == get) {
 			ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("chatid", completer + claimer));
-			new DataTransfer(this, params, DataTransfer.METHOD_GET).execute("http://10.0.0.19:8080//php/milab_get_chat.php");
+			new DataTransfer(this, params, DataTransfer.METHOD_GET).execute("http://nir.milab.idc.ac.il/php/milab_get_chat.php");
 		} else {
 			ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("chatid", completer + claimer));
-			params.add(new BasicNameValuePair("name", uid));
+			params.add(new BasicNameValuePair("name", me));
 			params.add(new BasicNameValuePair("message", message));
-			new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://10.0.0.19:8080/php/milab_update_chat.php");
+			new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://nir.milab.idc.ac.il/php/milab_update_chat.php");
 		}
 	}
 

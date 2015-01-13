@@ -30,13 +30,14 @@ public class CompleteMatch extends Activity implements ServerAsyncParent {
 	String time;
 	String claimedBy;
 	String uid;
+	final static String msg = "You have a match for a deal - open to start chat";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_complete_match);
 
-		pref = getSharedPreferences("com.main.divvyapp", MODE_PRIVATE);
+		pref = getSharedPreferences(LoginPage.class.getSimpleName(), MODE_PRIVATE);
 		dealId = getIntent().getExtras().getInt("dealid");
 		context = getApplicationContext();
 		time = getIntent().getExtras().getString("deadLine");
@@ -95,6 +96,7 @@ public class CompleteMatch extends Activity implements ServerAsyncParent {
 	public void sendUpadte(View v) {
 		String claimer = claimedBy.substring(0, claimedBy.indexOf("-"));
 		String completer = uid.substring(0, uid.indexOf("-"));
+		String newMsg = msg + "chatid:" + uid;
 		
 		ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("deadLine", null));
@@ -102,14 +104,21 @@ public class CompleteMatch extends Activity implements ServerAsyncParent {
 		params.add(new BasicNameValuePair("uidNew", null));
 		params.add(new BasicNameValuePair("chatid", completer + claimer));
 		params.add(new BasicNameValuePair("uid", completer));
-		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://10.0.0.19:8080/php/milab_send_deal_update.php");
+		params.add(new BasicNameValuePair("msg", newMsg));
+		params.add(new BasicNameValuePair("target", claimedBy));
+		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://nir.milab.idc.ac.il/php/milab_send_deal_update.php");
 	}
 
 	// This should change to class that will make the match by send phone number or anything like this
 	@Override
 	public void doOnPostExecute(JSONObject jObj) {
 		Intent intent = new Intent(this, ChatAfterMatch.class);
-		intent.putExtra("claimedBy", claimedBy);
+		
+		Bundle extras = new Bundle();
+		extras.putString("claimedBy", claimedBy);
+		extras.putString("uid", uid);
+		
+		intent.putExtras(extras);
 		startActivity(intent);
 		finish();
 	}

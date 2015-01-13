@@ -31,7 +31,7 @@ public class FindMeMatch extends Activity implements OnClickListener, ServerAsyn
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_find_me_match);
 		
-		pref = getSharedPreferences("com.main.divvyapp", MODE_PRIVATE);
+		pref = getSharedPreferences(LoginPage.class.getSimpleName(), MODE_PRIVATE);
 		dealId = getIntent().getExtras().getInt("dealid", -1);
 		context = getApplicationContext();
 		deadLine = (TimePicker) findViewById(R.id.deadLine);
@@ -46,7 +46,7 @@ public class FindMeMatch extends Activity implements OnClickListener, ServerAsyn
 		params.add(new BasicNameValuePair("uidNew", pref.getString("uid", "error")));
 		params.add(new BasicNameValuePair("chatid", "request"));
 		params.add(new BasicNameValuePair("uid", ""));
-		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://10.0.0.19:8080/php/milab_send_deal_update.php");
+		new DataTransfer(this, params, DataTransfer.METHOD_POST).execute("http://nir.milab.idc.ac.il/php/milab_send_deal_update.php");
 	}
 	
 	@Override

@@ -4,23 +4,18 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/mainChatList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <ListView
-            android:id="@+id/mainChatList"
-            android:layout_width="wrap_content"
-            android:layout_height="376dp"
-            android:cacheColorHint="#00000000"
-            android:divider="@null"
-            android:dividerHeight="0dp"
-            android:fastScrollEnabled="true"
-            android:listSelector="#00000000"
-            android:orientation="vertical" >
-
-        </ListView>
-    </LinearLayout>
+        android:layout_height="376dp"
+        android:cacheColorHint="#00000000"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:layout_above="@+id/chatWindow"
+        android:fastScrollEnabled="true"
+        android:listSelector="#00000000"
+        android:orientation="vertical" >
+    </ListView>
 
     <Button
         android:id="@+id/send"

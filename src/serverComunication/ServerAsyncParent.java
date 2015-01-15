@@ -1,4 +1,4 @@
-package helpeMethods;
+package serverComunication;
 
 import org.json.JSONObject;
 

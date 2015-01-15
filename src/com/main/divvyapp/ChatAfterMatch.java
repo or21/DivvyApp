@@ -10,8 +10,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import helpeMethods.DataTransfer;
-import helpeMethods.ServerAsyncParent;
+import serverComunication.DataTransfer;
+import serverComunication.ServerAsyncParent;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;

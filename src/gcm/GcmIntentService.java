@@ -1,4 +1,4 @@
-package helpeMethods;
+package gcm;
 
 import com.google.android.gms.R;
 import com.google.android.gms.gcm.GoogleCloudMessaging;

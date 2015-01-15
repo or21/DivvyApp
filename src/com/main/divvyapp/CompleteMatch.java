@@ -1,7 +1,5 @@
 package com.main.divvyapp;
 
-import helpeMethods.DataTransfer;
-import helpeMethods.ServerAsyncParent;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,6 +7,9 @@ import java.util.Calendar;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+
+import serverComunication.DataTransfer;
+import serverComunication.ServerAsyncParent;
 
 import android.app.Activity;
 import android.content.Context;

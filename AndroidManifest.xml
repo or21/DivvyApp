@@ -29,7 +29,7 @@
             android:value="@integer/google_play_services_version" />
 
        <receiver
-            android:name="helpeMethods.GcmBroadcastReceiver"
+            android:name="gcm.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -39,7 +39,7 @@
             </intent-filter>
         </receiver> 
 
-        <service android:name="helpeMethods.GcmIntentService" /> 
+        <service android:name="gcm.GcmIntentService" /> 
 
         <activity
             android:name=".LoginPage"

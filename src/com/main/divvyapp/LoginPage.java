@@ -1,7 +1,5 @@
 package com.main.divvyapp;
 
-import helpeMethods.DataTransfer;
-import helpeMethods.ServerAsyncParent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +9,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+
+import serverComunication.DataTransfer;
+import serverComunication.ServerAsyncParent;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;

@@ -1,4 +1,4 @@
-package helpeMethods;
+package serverComunication;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -105,6 +105,10 @@ public class DataTransfer extends AsyncTask<String, Void, Boolean> {
 		}
 
 		return isRequestSucceeded;
+	}
+	
+	public JSONObject getJsonObj(){
+		return jObj;
 	}
 
 	@Override

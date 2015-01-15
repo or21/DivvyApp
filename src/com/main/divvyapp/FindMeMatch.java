@@ -1,13 +1,14 @@
 package com.main.divvyapp;
 
-import helpeMethods.DataTransfer;
-import helpeMethods.ServerAsyncParent;
 
 import java.util.ArrayList;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+
+import serverComunication.DataTransfer;
+import serverComunication.ServerAsyncParent;
 
 import android.app.Activity;
 import android.content.Context;

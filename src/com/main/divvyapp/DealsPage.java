@@ -10,8 +10,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import helpeMethods.DataTransfer;
-import helpeMethods.ServerAsyncParent;
+import serverComunication.DataTransfer;
+import serverComunication.ServerAsyncParent;
+import serverComunication.ClietSideCommunicator;
+
+import helpeMethods.ImageAdapter;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -36,6 +39,9 @@ public class DealsPage extends Activity implements ServerAsyncParent {
 	int dealid;
 	private GridView mainList;
 	Context context;
+	ClietSideCommunicator cummunicator;
+	JSONArray jsonArr;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,90 +55,89 @@ public class DealsPage extends Activity implements ServerAsyncParent {
 		else {
 			setContentView(R.layout.activity_deals_page);
 
+			cummunicator = new ClietSideCommunicator();
 			context = getApplicationContext();
 
 			// initialize the main list of deals
 			mainList = (GridView) findViewById(R.id.mainList);
+			
+//		    mainList.setAdapter(new ImageAdapter(this));
 
-			// Gets data from previous activity - not necessary
+
+		    /*
+		     * Gets data from prev activity. We should use
+		     * it to recognize the user after sign in process
+		     */
 			Intent intent = getIntent();
 			int id = intent.getIntExtra("id", -1);
 			getDataFromServer(id);
 		}
 	}
+	
 
 	public void getDataFromServer(int id) {
 		// Sending GET request to server
-		ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("id", Integer.toString(id)));
-		new DataTransfer(this, params, DataTransfer.METHOD_GET).execute("http://nir.milab.idc.ac.il/php/milab_get_deals.php");
+//		ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+//		params.add(new BasicNameValuePair("id", Integer.toString(id)));
+//		new DataTransfer(this, params, DataTransfer.METHOD_GET).execute("http://nir.milab.idc.ac.il/php/milab_get_deals.php");
+		cummunicator.connectToServer(this);
 	}
+	
 
 	public void setDataFromServer(JSONArray deals) {
 		try {
+				
+			final List<String> storeList = cummunicator.setDealsFromServer(deals);
+			
+	        GridView gridview = (GridView) findViewById(R.id.mainList);
+	        gridview.setAdapter(new ImageAdapter(this,storeList));
+			
 			// create the grid item mapping
-			String[] from = new String[] {"storeid"};
-			int[] to = new int[] {R.id.storeid};
-
-			// gets all store names to represent each name once on the list
-			// not effective solution
-			List<String> storeidArr = new ArrayList<String>();
-			for (int i = 0; i < deals.length(); i++) {
-				JSONObject row = deals.getJSONObject(i);
-				String currentStoreid = row.getString("storeid");
-				if (!(storeidArr.contains(currentStoreid))) {
-					storeidArr.add(row.getString("storeid"));
-				}
-			}
-
-			// looping through All deals prepare the list of all stores
-			List<HashMap<String, String>> fillMaps = new ArrayList<HashMap<String, String>>();
-			for(int i = 0; i <  deals.length(); i++){
-				JSONObject row = deals.getJSONObject(i);
-				String currentStoreid = row.getString("storeid");
-
-				if(storeidArr.contains(currentStoreid)){
-					HashMap<String, String> map = new HashMap<String, String>();
-					map.put("id", row.getString("id"));
-					map.put("claimedBy", row.getString("claimedBy"));
-					map.put("picture", row.getString("picture"));
-					map.put("storeid", row.getString("storeid"));
-					map.put("deadLine", row.getString("deadLine"));
-					fillMaps.add(map);
-					storeidArr.remove(storeidArr.indexOf(currentStoreid));
-				}
-			}
+//			String[] from = new String[] {"storeid"};
+//			int[] to = new int[] {R.id.storeid};
+					    
 			// fill in the grid_item layout
-			SimpleAdapter adapter = new SimpleAdapter(this, fillMaps, R.layout.item_list, from, to);
-			mainList.setAdapter(adapter);
-			mainList.setClickable(true);
+//			SimpleAdapter adapter = new SimpleAdapter(this, fillMaps, R.layout.item_list, from, to);
+//			mainList.setAdapter(adapter);
+//			mainList.setClickable(true);
+	        
 			mainList.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 					HashMap<String, String> selected = (HashMap<String, String>) mainList.getItemAtPosition(position);
-					String selectedStore = selected.get("storeid");
+					String selectedStore = storeList.get(position);
+					
 					Intent intent = new Intent(context, StorePage.class);
 					intent.putExtra("selectedFromList", selectedStore);
 					startActivity(intent);
 				}
 			});
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+
 	@Override
 	public void doOnPostExecute(JSONObject jObj) {
 		try {
 			// Retrieving JSON array from server
-			setDataFromServer(jObj.getJSONArray("deals"));
+			jsonArr = jObj.getJSONArray("deals");
+			setDataFromServer(jsonArr);
 
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public JSONArray getJsonArr(){
+		return this.jsonArr;
+	}
 
+
+	
 	// Added for GCM
 	private boolean checkPlayServices() {
 		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);

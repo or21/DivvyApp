@@ -1,7 +1,5 @@
 package com.main.divvyapp;
 
-import helpeMethods.DataTransfer;
-import helpeMethods.ServerAsyncParent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +10,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import serverComunication.DataTransfer;
+import serverComunication.ServerAsyncParent;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,6 +28,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class StorePage extends Activity implements ServerAsyncParent {
 
 	String selectedStore;
+	String[] fillMapsArr;
 	int dealid;
 	private GridView dealList;
 	Context context;
@@ -39,7 +41,7 @@ public class StorePage extends Activity implements ServerAsyncParent {
 		
 		pref = getSharedPreferences(LoginPage.class.getSimpleName(), MODE_PRIVATE);
 		selectedStore =  getIntent().getExtras().getString("selectedFromList");
-
+		fillMapsArr = getIntent().getExtras().getStringArray("fillMapsArr");
 		context = getApplicationContext();
 
 		// initialize the main list of deals
@@ -64,22 +66,14 @@ public class StorePage extends Activity implements ServerAsyncParent {
 			String[] from = new String[] {"id"};
 			int[] to = new int[] {R.id.id};
 
-			//counting how much deals the store have
-			int dealsCounter = 0;
+			List<HashMap<String, String>> fillMaps = new ArrayList<HashMap<String, String>>();
+
+		
 			for (int i = 0; i < deals.length(); i++) {
 				JSONObject row = deals.getJSONObject(i);
-				if (row.getString("storeid").equals(selectedStore)) {
-					dealsCounter++;
-				}
-			}
-
-			// looping through All deals in the store
-			List<HashMap<String, String>> fillMaps = new ArrayList<HashMap<String, String>>();
-			for(int i = 0; i <  dealsCounter; i++){
-				JSONObject row = deals.getJSONObject(i);
 				String currentStoreid = row.getString("storeid");
-
-				if(selectedStore.equals(currentStoreid)){
+				
+				if (currentStoreid.equals(selectedStore)) {
 					HashMap<String, String> map = new HashMap<String, String>();
 					map.put("id", row.getString("id"));
 					map.put("claimedBy", row.getString("claimedBy"));
@@ -88,8 +82,10 @@ public class StorePage extends Activity implements ServerAsyncParent {
 					map.put("deadLine", row.getString("deadLine"));
 					fillMaps.add(map);
 				}
-
 			}
+
+		
+			
 			// fill in the grid_item layout
 			SimpleAdapter adapter = new SimpleAdapter(this, fillMaps, R.layout.item_list, from, to);
 			dealList.setAdapter(adapter);

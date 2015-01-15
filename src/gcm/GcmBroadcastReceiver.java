@@ -1,4 +1,4 @@
-package helpeMethods;
+package gcm;
 
 import android.app.Activity;
 import android.content.ComponentName;

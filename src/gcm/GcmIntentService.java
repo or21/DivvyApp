@@ -91,7 +91,7 @@ public class GcmIntentService extends IntentService {
 
 		Intent intent = new Intent();
 		intent.putExtras(chat);
-
+		
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
 		.setSmallIcon(R.drawable.ic_plusone_tall_off_client)
 		.setContentTitle("You have a match")

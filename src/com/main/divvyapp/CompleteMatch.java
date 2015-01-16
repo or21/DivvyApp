@@ -31,7 +31,7 @@ public class CompleteMatch extends Activity implements ServerAsyncParent {
 	String time;
 	String claimedBy;
 	String uid;
-	final static String msg = "You have a match for a deal - open to start chat";
+	final static String msg = "You have a match for a deal - click to start chat";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -7,7 +7,7 @@
     <ListView
         android:id="@+id/mainChatList"
         android:layout_width="wrap_content"
-        android:layout_height="376dp"
+        android:layout_height="wrap_content"
         android:cacheColorHint="#00000000"
         android:divider="@null"
         android:dividerHeight="0dp"

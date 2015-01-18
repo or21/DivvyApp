@@ -24,11 +24,11 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-	<meta-data
+        <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-       <receiver
+        <receiver
             android:name="gcm.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
@@ -37,9 +37,9 @@
 
                 <category android:name="com.main.divvyapp" />
             </intent-filter>
-        </receiver> 
+        </receiver>
 
-        <service android:name="gcm.GcmIntentService" /> 
+        <service android:name="gcm.GcmIntentService" />
 
         <activity
             android:name=".LoginPage"
@@ -70,6 +70,10 @@
         <activity
             android:name=".StorePage"
             android:label="@string/title_activity_store_page" >
+        </activity>
+        <activity
+            android:name=".AddNewDeal"
+            android:label="@string/title_activity_add_new_deal" >
         </activity>
     </application>
 

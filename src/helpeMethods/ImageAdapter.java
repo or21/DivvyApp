@@ -7,8 +7,9 @@ import java.util.Map;
 
 import org.json.JSONArray;
 
-import com.main.divvyapp.DealsPage;
 import com.main.divvyapp.R;
+
+
 
 import serverComunication.ClietSideCommunicator;
 
@@ -31,10 +32,17 @@ public class ImageAdapter extends BaseAdapter {
 	    	constantStores.put("castro", R.drawable.castro);
 	    	constantStores.put("nike", R.drawable.nike);
 	    	constantStores.put("hm", R.drawable.hm);
+	    	
+	    	///////////////deals//////////////////////
+	    	constantStores.put("11", R.drawable.oneplusone);
+	    	constantStores.put("12", R.drawable.oneplustwo);
+
+
 
 	    }
 	
-	 private Context mContext;
+	 // The activity
+	 private Context activity;
 	 
 	 //stores from database
 	 private List<String> recievedStoreList;
@@ -47,7 +55,7 @@ public class ImageAdapter extends BaseAdapter {
 	 public ImageAdapter(Context c, List<String> recievedStoreList) {
 		 this.recievedStoreList = recievedStoreList;
 		 
-	     mContext = c;
+		 activity = c;
 	     
 	     String currentStore = "";
 	     imageList = new ArrayList<Integer>();
@@ -58,20 +66,22 @@ public class ImageAdapter extends BaseAdapter {
 				if (constantStores.containsKey(currentStore)) {
 					imageList.add(constantStores.get(currentStore));
 
-				}else if(!(constantStores.containsKey("newlogo"))){
-					imageList.add(constantStores.get("newlogo"));
+				}else if(!(constantStores.containsKey(currentStore))){
+					imageList.add(constantStores.get("new_store"));
 				}
 			}
+			
 		}
 	     
-	     
+			imageList.add(R.drawable.addstore);
+
 	    }
 	 
 	    // create a new ImageView for each item referenced by the Adapter
 	    public View getView(int position, View convertView, ViewGroup parent) {
 	        ImageView imageView;
 	        if (convertView == null) {  // if it's not recycled, initialize some attributes
-	            imageView = new ImageView(mContext);
+	            imageView = new ImageView(activity);
 	            imageView.setLayoutParams(new GridView.LayoutParams(255, 255));
 	            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 	            imageView.setPadding(8, 8, 8, 8);

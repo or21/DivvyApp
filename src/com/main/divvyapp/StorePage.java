@@ -1,6 +1,8 @@
 package com.main.divvyapp;
 
 
+import helpeMethods.ImageAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import serverComunication.ClietSideCommunicator;
 import serverComunication.DataTransfer;
 import serverComunication.ServerAsyncParent;
 
@@ -33,6 +36,7 @@ public class StorePage extends Activity implements ServerAsyncParent {
 	private GridView dealList;
 	Context context;
 	SharedPreferences pref;
+	ClietSideCommunicator cummunicator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,57 +59,36 @@ public class StorePage extends Activity implements ServerAsyncParent {
 
 	public void getDataFromServer(int id) {
 		// Sending GET request to server
-		ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("id", Integer.toString(id)));
-		new DataTransfer(this, params, DataTransfer.METHOD_GET).execute("http://nir.milab.idc.ac.il/php/milab_get_deals.php");
+		cummunicator = new ClietSideCommunicator();
+		cummunicator.connectDealsTable(this);
 	}
 
 	public void setDataFromServer(JSONArray deals) {
 		try {
-			// create the grid item mapping
-			String[] from = new String[] {"id"};
-			int[] to = new int[] {R.id.id};
-
-			List<HashMap<String, String>> fillMaps = new ArrayList<HashMap<String, String>>();
-
-		
-			for (int i = 0; i < deals.length(); i++) {
-				JSONObject row = deals.getJSONObject(i);
-				String currentStoreid = row.getString("storeid");
-				
-				if (currentStoreid.equals(selectedStore)) {
-					HashMap<String, String> map = new HashMap<String, String>();
-					map.put("id", row.getString("id"));
-					map.put("claimedBy", row.getString("claimedBy"));
-					map.put("picture", row.getString("picture"));
-					map.put("storeid", row.getString("storeid"));
-					map.put("deadLine", row.getString("deadLine"));
-					fillMaps.add(map);
-				}
-			}
-
-		
+			final List<String> listOfDealsId = cummunicator.getFromTable(deals,"id","storeid",selectedStore);
+			final List<String> listOfDealsClaimedBy = cummunicator.getFromTable(deals,"claimedBy","storeid",selectedStore);
+			final List<String> listOfDealsDeadLine = cummunicator.getFromTable(deals,"deadLine","storeid",selectedStore);
 			
-			// fill in the grid_item layout
-			SimpleAdapter adapter = new SimpleAdapter(this, fillMaps, R.layout.item_list, from, to);
-			dealList.setAdapter(adapter);
-			dealList.setClickable(true);
+			
+			// Set deal logos on gridView
+	        GridView gridview = dealList;
+
+//	        GridView gridview = (GridView) findViewById(R.id.dealList);
+	        gridview.setAdapter(new ImageAdapter(this,listOfDealsId));
+
+//			dealList.setClickable(true);
 			dealList.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		
 
-					HashMap<String, String> selected = (HashMap<String, String>) dealList.getItemAtPosition(position);
-					String claimedBy = selected.get("claimedBy");
-					String deadLine = selected.get("deadLine");
-					dealid = Integer.parseInt(selected.get("id"));
-
-					if (!claimedBy.equals("")) {
+					if (!(listOfDealsClaimedBy.get(position).equals("")) && !(listOfDealsClaimedBy.get(position).equals("null"))) {
 						Intent intent = new Intent(context, CompleteMatch.class);
 						intent.putExtra("dealid", dealid);
-						intent.putExtra("claimedBy", claimedBy);
+						intent.putExtra("claimedBy", listOfDealsClaimedBy.get(position));
 						intent.putExtra("uid", pref.getString("uid", "error"));
-						intent.putExtra("deadLine", deadLine);
+						intent.putExtra("deadLine", listOfDealsDeadLine.get(position));
 						startActivity(intent);
 					}
 					else {
@@ -115,6 +98,9 @@ public class StorePage extends Activity implements ServerAsyncParent {
 					}
 				}
 			});
+			
+
+
 
 		} catch (Exception e) {
 			e.printStackTrace();

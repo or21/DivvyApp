@@ -28,5 +28,6 @@
     <string name="title_activity_add_deal">AddDeal</string>
     <string name="title_activity_chat_after_match">ChatAfterMatch</string>
     <string name="title_activity_store_page">StorePage</string>
+    <string name="title_activity_add_new_deal">AddNewDeal</string>
 
 </resources>

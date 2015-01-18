@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import serverComunication.DataTransfer;
 import serverComunication.ServerAsyncParent;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

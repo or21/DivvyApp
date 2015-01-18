@@ -1,8 +1,6 @@
 package com.main.divvyapp;
 
-import java.util.HashMap;
 import java.util.List;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;

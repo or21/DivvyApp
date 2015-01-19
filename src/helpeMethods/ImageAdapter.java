@@ -73,7 +73,7 @@ public class ImageAdapter extends BaseAdapter {
 					imageList.add(constantStores.get(currentStore));
 
 				}else if(!(constantStores.containsKey(currentStore))){
-					imageList.add(constantStores.get("new_store"));
+					imageList.add(constantStores.get("11"));
 				}
 			}
 			

@@ -85,7 +85,7 @@ public class StorePage extends Activity implements ServerAsyncParent {
 					}
 					else {
 						Intent intent = new Intent(context, FindMeMatch.class);
-						intent.putExtra("dealid", Integer.parseInt(listOfDealsId.get(position).toString()));
+						intent.putExtra("dealid", Integer.parseInt(listOfDealsId.get(position)));
 						startActivity(intent);
 					}
 				}

@@ -5,14 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONArray;
-
 import com.main.divvyapp.R;
-
-
-
-import serverComunication.ClietSideCommunicator;
-
 
 import android.content.Context;
 import android.view.View;

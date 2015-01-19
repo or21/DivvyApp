@@ -36,6 +36,8 @@ public class ImageAdapter extends BaseAdapter {
 	    	constantStores.put("americaneagle", R.drawable.americaneagle);
 	    	constantStores.put("rayban", R.drawable.rayban);
 	    	constantStores.put("apple", R.drawable.apple);
+	    	constantStores.put("crazyline", R.drawable.crazyline);
+	    	constantStores.put("lacoste", R.drawable.lacoste);
 	    	
 	    	///////////////deals//////////////////////
 	    	constantStores.put("11", R.drawable.oneplusone);

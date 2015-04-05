@@ -57,7 +57,7 @@ public class CompleteMatch extends Activity implements ServerAsyncParent {
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(context, DealsPage.class);
+					Intent intent = new Intent(context, StorePage.class);
 					startActivity(intent);
 					finish();
 				}

@@ -56,7 +56,7 @@ public class FindMeMatch extends Activity implements OnClickListener, ServerAsyn
 
 	@Override
 	public void doOnPostExecute(JSONObject jObj) {
-		Intent intent = new Intent(this, DealsPage.class);
+		Intent intent = new Intent(this, StorePage.class);
 		startActivity(intent);
 		finish();
 	}

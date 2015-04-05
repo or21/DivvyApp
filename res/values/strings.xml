@@ -29,5 +29,10 @@
     <string name="title_activity_chat_after_match">ChatAfterMatch</string>
     <string name="title_activity_store_page">StorePage</string>
     <string name="title_activity_add_new_deal">AddNewDeal</string>
-
+    <string name="title_activity_filter">Filter</string>
+    <string name="title_activity_chat_history">ChatHistory</string>
+    <string name="previous_chats">Previous Chats</string>
+    <string name="other_user">Other User</string>
+    <string name="deal_description">Deal Description</string>
+    
 </resources>

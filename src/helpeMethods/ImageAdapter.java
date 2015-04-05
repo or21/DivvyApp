@@ -17,28 +17,28 @@ import android.widget.ImageView;
 public class ImageAdapter extends BaseAdapter {
 	
 	//Store Map
-	  private static final Map<String, Integer> constantStores;
-	    static
-	    {
-	    	constantStores = new HashMap<String, Integer>();
-	    	constantStores.put("new_store", R.drawable.newlogo);
-	    	constantStores.put("castro", R.drawable.castro);
-	    	constantStores.put("nike", R.drawable.nike);
-	    	constantStores.put("hm", R.drawable.hm);
-	    	constantStores.put("laline", R.drawable.laline);
-	    	constantStores.put("americaneagle", R.drawable.americaneagle);
-	    	constantStores.put("rayban", R.drawable.rayban);
-	    	constantStores.put("apple", R.drawable.apple);
-	    	constantStores.put("crazyline", R.drawable.crazyline);
-	    	constantStores.put("lacoste", R.drawable.lacoste);
-	    	
-	    	///////////////deals//////////////////////
-	    	constantStores.put("11", R.drawable.oneplusone);
-	    	constantStores.put("12", R.drawable.oneplustwo);
-
-
-
-	    }
+//	  private static final Map<String, Integer> constantStores;
+//	    static
+//	    {
+//	    	constantStores = new HashMap<String, Integer>();
+//	    	constantStores.put("new_store", R.drawable.newlogo);
+//	    	constantStores.put("castro", R.drawable.castro);
+//	    	constantStores.put("nike", R.drawable.nike);
+//	    	constantStores.put("hm", R.drawable.hm);
+//	    	constantStores.put("laline", R.drawable.laline);
+//	    	constantStores.put("americaneagle", R.drawable.americaneagle);
+//	    	constantStores.put("rayban", R.drawable.rayban);
+//	    	constantStores.put("apple", R.drawable.apple);
+//	    	constantStores.put("crazyline", R.drawable.crazyline);
+//	    	constantStores.put("lacoste", R.drawable.lacoste);
+//	    	
+//	    	///////////////deals//////////////////////
+//	    	constantStores.put("11", R.drawable.oneplusone);
+//	    	constantStores.put("12", R.drawable.oneplustwo);
+//
+//
+//
+//	    }
 	
 	 // The activity
 	 private Context activity;
@@ -59,20 +59,20 @@ public class ImageAdapter extends BaseAdapter {
 	     String currentStore = "";
 	     imageList = new ArrayList<Integer>();
 	     
-	     for (int i = 0; i < recievedStoreList.size(); i++) {
-	    	 currentStore = recievedStoreList.get(i).toLowerCase();
-			if (!(imageList.contains(currentStore))) {
-				if (constantStores.containsKey(currentStore)) {
-					imageList.add(constantStores.get(currentStore));
-
-				}else if(!(constantStores.containsKey(currentStore))){
-					imageList.add(constantStores.get("11"));
-				}
-			}
-			
-		}
+//	     for (int i = 0; i < recievedStoreList.size(); i++) {
+//	    	 currentStore = recievedStoreList.get(i).toLowerCase();
+//			if (!(imageList.contains(currentStore))) {
+//				if (constantStores.containsKey(currentStore)) {
+//					imageList.add(constantStores.get(currentStore));
+//
+//				}else if(!(constantStores.containsKey(currentStore))){
+//					imageList.add(constantStores.get("11"));
+//				}
+//			}
+//			
+//		}
 	     
-			imageList.add(R.drawable.addstore);
+//			imageList.add(R.drawable.addstore);
 
 	    }
 	 

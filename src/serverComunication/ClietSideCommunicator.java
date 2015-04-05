@@ -21,6 +21,17 @@ public class ClietSideCommunicator {
 		new DataTransfer(activity, params, DataTransfer.METHOD_GET).execute("http://nir.milab.idc.ac.il/php/milab_get_deals.php");
 	}
 	
+	/*
+	 * Connects to 'chats' table in database
+	 */
+	public void connectChatsTable(ServerAsyncParent activity, String uid){
+		ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+		String partialUid = uid.substring(0, uid.indexOf("-"));
+		params.add(new BasicNameValuePair("partialuid", partialUid));
+		params.add(new BasicNameValuePair("uid", uid));
+		new DataTransfer(activity, params, DataTransfer.METHOD_GET).execute("http://nir.milab.idc.ac.il/php/milab_get_chat_list.php");
+	}
+	
 	
 	/*
 	 * Depends on JSON table, returns list of all values under this field
@@ -64,6 +75,7 @@ public class ClietSideCommunicator {
 	 */
 	public List<String> getFromTable(JSONArray table,String param, String filterField , String filterParam){
 try {
+
 			
 			// puts all param values from table to array storeidArr
 			List<String> paramArr = new ArrayList<String>();

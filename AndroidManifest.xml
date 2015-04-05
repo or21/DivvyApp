@@ -75,6 +75,14 @@
             android:name=".AddNewDeal"
             android:label="@string/title_activity_add_new_deal" >
         </activity>
+        <activity
+            android:name=".Filter"
+            android:label="@string/title_activity_filter" >
+        </activity>
+        <activity
+            android:name=".ChatHistory"
+            android:label="@string/title_activity_chat_history" >
+        </activity>
     </application>
 
 </manifest>

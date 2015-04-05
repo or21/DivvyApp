@@ -146,7 +146,8 @@ public class LoginPage extends Activity implements OnClickListener , ServerAsync
     }
 
 	public void goToDealsPageAndFinish(View v) {
-		Intent intent = new Intent(this, DealsPage.class);
+		Intent intent = new Intent(this, StorePage.class);
+		intent.putExtra("filter", "all");
 		startActivity(intent);
 		finish();
 	}
